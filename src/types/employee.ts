@@ -1,31 +1,31 @@
+/**
+ * 従業員情報を表すクラスです.
+ */
 export class Employee {
-  /**
-   * 従業員情報を表すクラスです.
-   * @param _id - ID
-   * @param _name - 名前
-   * @param _image - 画像
-   * @param _gender  - 性別
-   * @param _hireDate - 入社日
-   * @param _mailAddress  - メールアドレス
-   * @param _zipCode  - 郵便番号
-   * @param _address  - 住所
-   * @param _telephone  - 電話番号
-   * @param _salary  - 給料
-   * @param _characteristics  - 特性
-   * @param _dependentsCount  - 扶養人数
-   */
   constructor(
+    // ID
     private _id: number,
+    // 名前
     private _name: string,
+    // 画像
     private _image: string,
+    // 性別
     private _gender: string,
+    // 入社日
     private _hireDate: Date,
+    // メールアドレス
     private _mailAddress: string,
+    // 郵便番号
     private _zipCode: string,
+    // 住所
     private _address: string,
+    // 電話番号
     private _telephone: string,
+    // 給料
     private _salary: string,
+    // 特性
     private _characteristics: string,
+    // 扶養人数
     private _dependentsCount: number
   ) {}
   public get id(): number {

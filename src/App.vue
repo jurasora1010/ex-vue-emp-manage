@@ -1,10 +1,13 @@
 <template>
   <div id="app">
+    <!-- ヘッダーはcomponentとして埋め込まれている -->
     <Header />
     <div class="top-wrapper">
+      <!-- ページが切り替わるところ -->
       <router-view />
     </div>
 
+    <!-- フッターはcomponentとして埋め込まれている -->
     <Footer />
   </div>
 </template>
