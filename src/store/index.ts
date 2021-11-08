@@ -14,24 +14,28 @@ export default new Vuex.Store({
   }, // end state
   actions: {
     /**
-     * 従業員一覧情報を WebAPI から取得 して mutation を呼び出す.
-     * @param context - mutation に渡すための context
-     * @param payload - 取得した一覧情報を格納
+     * WebAPIから従業員情報を取得する.
+     *
+     * @remarks
+     * 従業員一覧情報を WebAPI から取得 して mutation を呼び出す。
+     *
+     * @param context - コンテキストオブジェクト
      */
-    async getEmployeeList(context, payload) {
+    async getEmployeeList(context) {
       const response = await axios.get(
         "http://54.202.162.233:8080/ex-emp-api/employee/employees"
       );
       console.dir("response" + JSON.stringify(response));
-      payload = response.data;
+      const payload = response.data;
       context.commit("showEmployeeList", payload);
     },
   }, // end actions
   mutations: {
     /**
      * 従業員一覧情報を作成して state に格納する.
-     * @param state - 従業員一覧情報を格納
-     * @param payload - 取得した一覧情報を格納
+     *
+     * @param state - 従業員一覧を呼ぶためのstate
+     * @param payload - WebAPIから取得した従業員一覧情報＆従業員数
      */
     showEmployeeList(state, payload) {
       state.totalEmployeeCount = payload.EmployeeCount;
@@ -59,7 +63,7 @@ export default new Vuex.Store({
     /**
      * 従業員数を返す.
      * @param state - 従業員一覧を呼ぶためのstate
-     * @returns - state内の従業員数を返す
+     * @returns - 従業員数
      */
     getEmployeeCount(state) {
       return state.employees.length;
@@ -67,7 +71,7 @@ export default new Vuex.Store({
     /**
      * 従業員一覧を返す.
      * @param state - 従業員一覧を呼ぶためのstate
-     * @returns - state内の従業員一覧を返す
+     * @returns - 従業員一覧
      */
     getEmployees(state) {
       return state.employees;
@@ -75,11 +79,14 @@ export default new Vuex.Store({
     /**
      * ID から従業員を検索し返す.
      * @param state - 従業員一覧を呼ぶためのstate
-     * @returns - IDの一致する従業員を検索し返す.
+     * @returns - 引数のIDと一致する従業員情報
      */
     getEmployeeId(state) {
       return (id: number) => {
-        return state.employees.filter((employee) => employee.id == id);
+        const newEmployees = state.employees.filter(
+          (employee) => employee.id == id
+        );
+        return newEmployees[0]; //配列ではなくオブジェクトで返す
       };
     },
   }, // end getters
