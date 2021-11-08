@@ -1,18 +1,6 @@
 <template>
   <div id="registerAdomin">
-    <div class="container">
-      <div class="header">
-        <div class="header-left">
-          <a href="login.html">
-            <img class="logo" src="img/header_logo.png" />
-          </a>
-        </div>
-
-        <div class="header-right">
-          <a href="registerAdmin.html">管理者登録</a>
-        </div>
-      </div>
-    </div>
+    <div class="container"></div>
     <div class="container">
       <div class="row register-page">
         <div class="error">{{ errorMessage }}</div>
@@ -79,11 +67,7 @@
         </form>
       </div>
     </div>
-    <div class="container">
-      <div class="footer">
-        <div class="footer-center">©️ xxx Inc.</div>
-      </div>
-    </div>
+    <div class="container"></div>
   </div>
 </template>
 
@@ -105,6 +89,11 @@ export default class RegisterAdmin extends Vue {
   private password = "";
   /**
    * 管理者情報を登録する
+   *
+   * @remarks
+   * 登録成功の場合、ログイン画面に遷移
+   * 登録失敗の場合、エラーメッセージを表示
+   *
    */
   async registerAdmin(): Promise<void> {
     const response = await axios.post(
@@ -115,7 +104,7 @@ export default class RegisterAdmin extends Vue {
         password: this.password,
       }
     );
-    if (response.data.status == "success") {
+    if (response.data.status === "success") {
       this["$router"].push("/loginAdmin");
     } else {
       this.errorMessage = "登録できませんでした(Invalid request parameter.)";
