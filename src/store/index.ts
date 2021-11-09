@@ -81,7 +81,7 @@ export default new Vuex.Store({
      * @param state - 従業員一覧を呼ぶためのstate
      * @returns - 引数のIDと一致する従業員情報
      */
-    getEmployeeId(state) {
+    getEmployeeById(state) {
       return (id: number) => {
         const newEmployees = state.employees.filter(
           (employee) => employee.id == id
