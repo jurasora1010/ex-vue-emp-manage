@@ -39,24 +39,25 @@ export default new Vuex.Store({
      */
     showEmployeeList(state, payload) {
       state.totalEmployeeCount = payload.EmployeeCount;
-      for (const employee of payload.employees) {
-        state.employees.push(
-          new Employee(
-            employee.id,
-            employee.name,
-            employee.image,
-            employee.gender,
-            employee.hireDate,
-            employee.mailAddress,
-            employee.zipCode,
-            employee.address,
-            employee.telephone,
-            employee.salary,
-            employee.characteristics,
-            employee.dependentsCount
-          )
-        );
-      }
+      state.employees = payload.employees;
+      // for (const employee of payload.employees) {
+      //   state.employees.push(
+      //     new Employee(
+      //       employee.id,
+      //       employee.name,
+      //       employee.image,
+      //       employee.gender,
+      //       employee.hireDate,
+      //       employee.mailAddress,
+      //       employee.zipCode,
+      //       employee.address,
+      //       employee.telephone,
+      //       employee.salary,
+      //       employee.characteristics,
+      //       employee.dependentsCount
+      //     )
+      //   );
+      // }
     },
   }, // end mutations
   getters: {

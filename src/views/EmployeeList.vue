@@ -1,7 +1,7 @@
 <template>
   <div id="employeeList">
     <div class="container">
-      <div>従業員数:{{ getEmployeeCount }}人</div>
+      <div>従業員数:{{ employeeCount }}人</div>
       <div class="row">
         <table class="striped">
           <thead>

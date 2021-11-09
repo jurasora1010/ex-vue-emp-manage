@@ -2,7 +2,7 @@
   <div id="employeeDetail">
     <div class="container">
       <div class="row">
-        <form action="employeeList.html">
+        <form>
           <fieldset>
             <legend>従業員情報</legend>
             <table>
@@ -75,16 +75,20 @@
                       id="dependentsCount"
                       type="text"
                       class="validate"
-                      value="3"
                       required
+                      v-model="currentDependentsCount"
                     />
-                    <label for="dependentsCount2">扶養人数</label>
+                    <label for="dependentsCount2"></label>
                   </div>
                 </td>
               </tr>
             </table>
 
-            <button class="btn btn-register waves-effect waves-light">
+            <button
+              class="btn btn-register waves-effect waves-light"
+              v-on:click="update"
+              type="button"
+            >
               更新
             </button>
           </fieldset>
@@ -108,15 +112,42 @@ export default class EmployeeDetail extends Vue {
   // 対象の従業員のイメージパス
   private currentEmployeeimage = "";
   //  対象の従業員の扶養人数
-  private currentDependentsCount!: number;
+  private currentDependentsCount = 0;
 
-  // 受け取ったIDから１件の従業員情報を取得する
+  /**
+   *  受け取ったIDから１件の従業員情報を取得する.
+   * */
   created(): void {
     const employeeId = parseInt(this["$route"].params.id);
     this.currentEmployee = this["$store"].getters.getEmployeeById(employeeId);
     this.currentEmployeeimage =
       "http://54.200.203.52:8080/ex-emp-api/img/" + this.currentEmployee.image;
     this.currentDependentsCount = this.currentEmployee.dependentsCount;
+  }
+
+  /**
+   * 扶養人数を更新する.
+   *
+   * @remarks
+   * 更新成功の場合、従業員一覧画面に遷移
+   * 更新失敗の場合、エラーメッセージを表示
+   *
+   */
+  async update(): Promise<void> {
+    console.log("this.currentDependentsCount:" + this.currentDependentsCount);
+
+    const response = await axios.post(
+      "http://54.200.203.52:8080/ex-emp-api/employee/update",
+      {
+        id: this.currentEmployee.id,
+        dependentsCount: this.currentDependentsCount,
+      }
+    );
+    if (response.data.status === "success") {
+      this["$router"].push("/employeeList");
+    } else {
+      this.errorMessage = "更新できませんでした(Invalid request parameter.)";
+    }
   }
 }
 </script>
