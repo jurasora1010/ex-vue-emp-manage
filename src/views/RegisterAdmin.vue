@@ -1,6 +1,5 @@
 <template>
   <div id="registerAdomin">
-    <div class="container"></div>
     <div class="container">
       <div class="row register-page">
         <div class="error">{{ errorMessage }}</div>
@@ -67,7 +66,6 @@
         </form>
       </div>
     </div>
-    <div class="container"></div>
   </div>
 </template>
 
@@ -88,7 +86,7 @@ export default class RegisterAdmin extends Vue {
   // パスワード
   private password = "";
   /**
-   * 管理者情報を登録する
+   * 管理者情報を登録する.
    *
    * @remarks
    * 登録成功の場合、ログイン画面に遷移
@@ -97,7 +95,7 @@ export default class RegisterAdmin extends Vue {
    */
   async registerAdmin(): Promise<void> {
     const response = await axios.post(
-      "http://54.202.162.233:8080/ex-emp-api/insert",
+      "http://54.200.203.52:8080/ex-emp-api/insert",
       {
         name: this.lastName + " " + this.firstName,
         mailAddress: this.mailAddress,
