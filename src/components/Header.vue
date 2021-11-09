@@ -15,9 +15,9 @@
           <router-link to="/loginAdmin">
             ログイン
           </router-link>
-          <a href="../../documents/html_mock/login.html">
-            <i class="fas fa-sign-in-alt"></i>ログアウト
-          </a>
+          <router-link to="/logoutAdmin">
+            ログアウト
+          </router-link>
         </div>
       </div>
     </div>

@@ -115,8 +115,8 @@ export default class EmployeeDetail extends Vue {
   private currentDependentsCount = 0;
 
   /**
-   *  受け取ったIDから１件の従業員情報を取得する.
-   * */
+   *  受け取ったIDから1件の従業員情報を取得する.
+   */
   created(): void {
     const employeeId = parseInt(this["$route"].params.id);
     this.currentEmployee = this["$store"].getters.getEmployeeById(employeeId);
